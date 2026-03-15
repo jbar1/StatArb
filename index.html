@@ -100,11 +100,14 @@
     .open-link:hover { background: #4C9BE822; }
 
     iframe {
-      width: 100%;
-      height: 420px;
+      width: calc(100% + 16px);   /* expand slightly left/right */
+      height: 440px;              /* more room for bottom area */
       border: none;
       display: block;
       background: #1a1a2e;
+      margin-left: -8px;          /* shift chart left */
+      margin-top: 6px;            /* shift chart slightly downward */
+      margin-bottom: -10px;       /* allow chart bottom to extend */
     }
 
     /* ── footer ── */
@@ -121,14 +124,14 @@
   <header>
     <h1>&#x1F4C8; Pair Trading — Z-Score Charts</h1>
     <span class="badge">10 pairs</span>
-    <span class="meta">Updated: 2026-03-15 19:21 CET</span>
+    <span class="meta">Updated: 2026-03-15 19:45 CET</span>
   </header>
 
   <main>
     <div class="card">
       <div class="card-header">
         <span class="pair-name">MYM / MZS</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_MYM_MZS.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_MYM_MZS.html" loading="lazy" title="MYM / MZS"></iframe>
@@ -136,7 +139,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">SI / MGC</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_SI_MGC.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_SI_MGC.html" loading="lazy" title="SI / MGC"></iframe>
@@ -144,7 +147,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">M2K / MZS</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_M2K_MZS.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_M2K_MZS.html" loading="lazy" title="M2K / MZS"></iframe>
@@ -152,7 +155,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">MES / MZS</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_MES_MZS.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_MES_MZS.html" loading="lazy" title="MES / MZS"></iframe>
@@ -160,7 +163,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">MES / M2K</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_MES_M2K.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_MES_M2K.html" loading="lazy" title="MES / M2K"></iframe>
@@ -168,7 +171,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">M2K / MZC</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_M2K_MZC.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_M2K_MZC.html" loading="lazy" title="M2K / MZC"></iframe>
@@ -176,7 +179,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">MCL / MES</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_MCL_MES.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_MCL_MES.html" loading="lazy" title="MCL / MES"></iframe>
@@ -184,7 +187,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">M2K / MCL</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_M2K_MCL.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_M2K_MCL.html" loading="lazy" title="M2K / MCL"></iframe>
@@ -192,7 +195,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">MES / MMC</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_MES_MMC.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_MES_MMC.html" loading="lazy" title="MES / MMC"></iframe>
@@ -200,7 +203,7 @@
     <div class="card">
       <div class="card-header">
         <span class="pair-name">M2K / MMC</span>
-        <span class="ts-badge">2026-03-15 19:21 CET</span>
+        <span class="ts-badge">2026-03-15 19:45 CET</span>
         <a class="open-link" href="charts/zscore_M2K_MMC.html" target="_blank">&#x2197; open</a>
       </div>
       <iframe src="charts/zscore_M2K_MMC.html" loading="lazy" title="M2K / MMC"></iframe>
@@ -208,7 +211,7 @@
   </main>
 
   <footer>
-    Auto-generated by GitHubChartUploader &bull; 2026-03-15 19:21 CET
+    Auto-generated by GitHubChartUploader &bull; 2026-03-15 19:45 CET
   </footer>
 </body>
 </html>
