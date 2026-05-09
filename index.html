@@ -23,7 +23,7 @@
       --radius: 10px;
 
       /* GLOBAL DASHBOARD SCALE */
-      --ui-scale: 0.84;
+      --ui-scale: 0.72;
     }
 
     * {
@@ -146,7 +146,7 @@
       display: flex;
       flex-direction: column;
 
-      min-height: 370px;
+      min-height: 280px;
 
       transition:
         border-color 0.18s,
@@ -228,18 +228,26 @@
     }
 
     iframe {
-      position: absolute;
-      inset: 0;
-
-      border: none;
-
-      width: calc(100% / var(--ui-scale));
-      height: calc(100% / var(--ui-scale));
-
-      transform: scale(var(--ui-scale));
-      transform-origin: top left;
-
-      background: var(--panel-2);
+        position: absolute;
+        inset: 0;
+    
+        border: none;
+    
+        /* bigger virtual canvas */
+        width: 132%;
+        height: 132%;
+    
+        /* stronger shrink */
+        transform: scale(var(--ui-scale));
+    
+        /* anchor top-left */
+        transform-origin: top left;
+    
+        /* shift content left/up */
+        margin-left: -11%;
+        margin-top: -3%;
+    
+        background: var(--panel-2);
     }
 
     /* =========================
