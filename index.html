@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
+
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0" />
 
-  <title>Pair Trading — Compact Dashboard</title>
+  <title>
+    Pair Trading — Compact Dashboard
+  </title>
 
   <meta name="description"
         content="Compact statistical arbitrage dashboard." />
@@ -13,6 +18,7 @@
   <style>
 
     :root {
+
       --bg: #0d0d1a;
 
       --panel: #141425;
@@ -25,6 +31,11 @@
       --muted: #666;
 
       --radius: 10px;
+
+      /* density defaults */
+
+      --card-height: 250px;
+      --card-width: 400px;
     }
 
     * {
@@ -34,6 +45,7 @@
     }
 
     body {
+
       font-family:
         'Segoe UI',
         system-ui,
@@ -76,9 +88,12 @@
       z-index: 10;
 
       backdrop-filter: blur(5px);
+
+      flex-wrap: wrap;
     }
 
     header h1 {
+
       font-size: 0.95rem;
       font-weight: 600;
 
@@ -101,10 +116,51 @@
     }
 
     .meta {
+
       margin-left: auto;
 
       font-size: 0.65rem;
       color: var(--muted);
+    }
+
+    /* =========================
+       DENSITY BUTTONS
+       ========================= */
+
+    .density-controls {
+
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .density-controls button {
+
+      background: #1c1c33;
+      color: #bbb;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 5px;
+
+      padding:
+        0.18rem 0.42rem;
+
+      font-size: 0.65rem;
+
+      cursor: pointer;
+
+      transition:
+        border-color 0.15s,
+        background 0.15s,
+        color 0.15s;
+    }
+
+    .density-controls button:hover {
+
+      border-color: var(--accent);
+      background: #232344;
+      color: white;
     }
 
     /* =========================
@@ -118,7 +174,10 @@
       grid-template-columns:
         repeat(
           auto-fill,
-          minmax(min(100%, 430px), 1fr)
+          minmax(
+            min(100%, var(--card-width)),
+            1fr
+          )
         );
 
       gap: 0.7rem;
@@ -144,7 +203,7 @@
       display: flex;
       flex-direction: column;
 
-      min-height: 260px;
+      min-height: var(--card-height);
 
       transition:
         border-color 0.18s,
@@ -243,40 +302,29 @@
       background: var(--panel-2);
     }
 
-    /* ===================================
-       AGGRESSIVE COMPACT CROPPING
-       =================================== */
+    /* =========================
+       CROPPED IFRAME
+       ========================= */
 
     iframe {
 
       position: absolute;
 
-      top: 0;
-      left: 0;
+      /*
+        shift chart viewport
+      */
+
+      top: -18px;
+      left: -90px;
 
       border: none;
 
       /*
-        Large virtual canvas
+        enlarge viewport
       */
 
-      width: 145%;
-      height: 145%;
-
-      /*
-        Strong shrink
-      */
-
-      transform: scale(0.69);
-
-      transform-origin: top left;
-
-      /*
-        Remove right whitespace
-      */
-
-      margin-left: -18%;
-      margin-top: -4%;
+      width: calc(100% + 180px);
+      height: calc(100% + 40px);
 
       background: var(--panel-2);
     }
@@ -305,10 +353,6 @@
 
     @media (max-width: 700px) {
 
-      header {
-        flex-wrap: wrap;
-      }
-
       .meta {
         width: 100%;
         margin-left: 0;
@@ -320,6 +364,7 @@
     }
 
   </style>
+
 </head>
 
 <body>
@@ -337,6 +382,22 @@
     <span class="meta">
       Updated: 2026-05-08 23:00 CEST
     </span>
+
+    <div class="density-controls">
+
+      <button onclick="setDensity('dense')">
+        Dense
+      </button>
+
+      <button onclick="setDensity('normal')">
+        Normal
+      </button>
+
+      <button onclick="setDensity('large')">
+        Large
+      </button>
+
+    </div>
 
   </header>
 
@@ -362,7 +423,7 @@
            href="charts/zscore_MES_MCL.html"
            target="_blank">
 
-           ↗ open
+          ↗ open
 
         </a>
 
@@ -400,7 +461,7 @@
            href="charts/zscore_MZS_MES.html"
            target="_blank">
 
-           ↗ open
+          ↗ open
 
         </a>
 
@@ -438,7 +499,7 @@
            href="charts/zscore_MES_MZC.html"
            target="_blank">
 
-           ↗ open
+          ↗ open
 
         </a>
 
@@ -464,6 +525,55 @@
     • Compact dashboard edition
 
   </footer>
+
+  <script>
+
+    function setDensity(mode) {
+
+      const root =
+        document.documentElement;
+
+      if (mode === 'dense') {
+
+        root.style.setProperty(
+          '--card-height',
+          '210px'
+        );
+
+        root.style.setProperty(
+          '--card-width',
+          '340px'
+        );
+      }
+
+      if (mode === 'normal') {
+
+        root.style.setProperty(
+          '--card-height',
+          '250px'
+        );
+
+        root.style.setProperty(
+          '--card-width',
+          '400px'
+        );
+      }
+
+      if (mode === 'large') {
+
+        root.style.setProperty(
+          '--card-height',
+          '320px'
+        );
+
+        root.style.setProperty(
+          '--card-width',
+          '520px'
+        );
+      }
+    }
+
+  </script>
 
 </body>
 </html>
