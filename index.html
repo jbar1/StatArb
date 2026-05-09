@@ -23,7 +23,7 @@
       --radius: 10px;
 
       /* GLOBAL DASHBOARD SCALE */
-      --ui-scale: 0.72;
+      --ui-scale: 0.70;
     }
 
     * {
@@ -221,31 +221,35 @@
        ========================= */
 
     .iframe-wrapper {
-      position: relative;
-      flex: 1;
-      overflow: hidden;
-      background: var(--panel-2);
+        position: relative;
+        flex: 1;
+        overflow: hidden;
+        background: var(--panel-2);
     }
-
+    
+    /* AGGRESSIVE CROPPING + OVERSCAN */
+    
     iframe {
         position: absolute;
-        inset: 0;
+    
+        top: 0;
+        left: 0;
     
         border: none;
     
-        /* bigger virtual canvas */
-        width: 132%;
-        height: 132%;
+        /* make iframe logically larger */
+        width: 145%;
+        height: 145%;
     
-        /* stronger shrink */
-        transform: scale(var(--ui-scale));
+        /* compact scaling */
+        transform: scale(0.69);
     
-        /* anchor top-left */
+        /* anchor scaling */
         transform-origin: top left;
     
-        /* shift content left/up */
-        margin-left: -11%;
-        margin-top: -3%;
+        /* shift content */
+        margin-left: -18%;
+        margin-top: -4%;
     
         background: var(--panel-2);
     }
@@ -299,9 +303,9 @@
     </span>
 
     <div class="density-controls">
-      <button onclick="setScale(0.78)">Dense</button>
-      <button onclick="setScale(0.84)">Normal</button>
-      <button onclick="setScale(0.92)">Large</button>
+      <button onclick="setScale(0.70)">Dense</button>
+      <button onclick="setScale(0.80)">Normal</button>
+      <button onclick="setScale(0.90)">Large</button>
     </div>
   </header>
 
