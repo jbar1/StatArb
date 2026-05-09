@@ -307,30 +307,33 @@
        ========================= */
 
     iframe {
-
     position: absolute;
 
-    /*
-      balanced viewport shift
-    */
-
-    top: -8px;
-    left: -15px;
+    top: -4px;
+    left: -22px;
 
     border: none;
 
     /*
-      render smaller
+      layout shrink
     */
 
-    zoom: 0.82;
+    zoom: 0.88;
 
     /*
-      moderate enlargement
+      visual shrink
     */
 
-    width: calc(100% + 55px);
-    height: 100%;
+    transform: scale(0.94);
+
+    transform-origin: top left;
+
+    /*
+      compensate dimensions
+    */
+
+    width: 118%;
+    height: 118%;
 
     background: var(--panel-2);
     }
