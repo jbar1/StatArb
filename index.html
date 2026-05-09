@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0" />
 
   <title>Pair Trading — Compact Dashboard</title>
 
@@ -10,10 +11,13 @@
         content="Compact statistical arbitrage dashboard." />
 
   <style>
+
     :root {
       --bg: #0d0d1a;
+
       --panel: #141425;
-      --panel-2: #1a1a2e;
+      --panel-2: #111122;
+
       --border: #2e2e4e;
       --accent: #4C9BE8;
 
@@ -21,9 +25,6 @@
       --muted: #666;
 
       --radius: 10px;
-
-      /* GLOBAL DASHBOARD SCALE */
-      --ui-scale: 0.70;
     }
 
     * {
@@ -33,13 +34,18 @@
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family:
+        'Segoe UI',
+        system-ui,
+        sans-serif;
+
       background: var(--bg);
       color: var(--text);
+
       min-height: 100vh;
 
-      font-size: 13px;
-      line-height: 1.25;
+      font-size: 12px;
+      line-height: 1.2;
     }
 
     /* =========================
@@ -47,72 +53,58 @@
        ========================= */
 
     header {
+
       background:
-        linear-gradient(135deg,
-        #141425 0%,
-        #1a1a35 100%);
+        linear-gradient(
+          135deg,
+          #141425 0%,
+          #1a1a35 100%
+        );
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
-      padding: 0.9rem 1.2rem;
+      padding:
+        0.7rem 1rem;
 
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.7rem;
 
       position: sticky;
       top: 0;
       z-index: 10;
 
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(5px);
     }
 
     header h1 {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
+
       color: #e0e0ff;
       letter-spacing: 0.02em;
     }
 
     .badge {
+
       background: var(--accent);
       color: white;
 
-      font-size: 0.62rem;
+      font-size: 0.58rem;
       font-weight: 700;
 
-      padding: 0.16rem 0.45rem;
+      padding:
+        0.14rem 0.42rem;
+
       border-radius: 999px;
     }
 
     .meta {
       margin-left: auto;
-      font-size: 0.7rem;
+
+      font-size: 0.65rem;
       color: var(--muted);
-    }
-
-    .density-controls {
-      display: flex;
-      gap: 0.35rem;
-      margin-left: 1rem;
-    }
-
-    .density-controls button {
-      background: #1f1f35;
-      color: #bbb;
-
-      border: 1px solid var(--border);
-      border-radius: 5px;
-
-      padding: 0.2rem 0.45rem;
-
-      font-size: 0.68rem;
-      cursor: pointer;
-    }
-
-    .density-controls button:hover {
-      border-color: var(--accent);
-      color: white;
     }
 
     /* =========================
@@ -120,15 +112,18 @@
        ========================= */
 
     main {
+
       display: grid;
 
       grid-template-columns:
-        repeat(auto-fill,
-        minmax(min(100%, 430px), 1fr));
+        repeat(
+          auto-fill,
+          minmax(min(100%, 430px), 1fr)
+        );
 
-      gap: 0.85rem;
+      gap: 0.7rem;
 
-      padding: 0.85rem;
+      padding: 0.7rem;
     }
 
     /* =========================
@@ -136,9 +131,12 @@
        ========================= */
 
     .card {
+
       background: var(--panel);
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--border);
+
       border-radius: var(--radius);
 
       overflow: hidden;
@@ -146,7 +144,7 @@
       display: flex;
       flex-direction: column;
 
-      min-height: 280px;
+      min-height: 260px;
 
       transition:
         border-color 0.18s,
@@ -155,11 +153,12 @@
     }
 
     .card:hover {
+
       border-color: var(--accent);
 
       box-shadow:
         0 0 0 1px #4C9BE822,
-        0 8px 28px #00000055;
+        0 8px 24px #00000055;
 
       transform: translateY(-1px);
     }
@@ -169,41 +168,53 @@
        ========================= */
 
     .card-header {
-      padding: 0.45rem 0.7rem;
+
+      padding:
+        0.38rem 0.65rem;
 
       background: var(--panel-2);
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--border);
 
       display: flex;
       align-items: center;
-      gap: 0.45rem;
+
+      gap: 0.4rem;
     }
 
     .pair-name {
+
       font-size: 0.78rem;
       font-weight: 600;
+
       color: #e0e0ff;
 
       flex: 1;
     }
 
     .ts-badge {
-      font-size: 0.62rem;
+
+      font-size: 0.58rem;
       color: var(--muted);
 
       white-space: nowrap;
     }
 
     .open-link {
-      font-size: 0.65rem;
+
+      font-size: 0.62rem;
 
       color: var(--accent);
+
       text-decoration: none;
 
-      padding: 0.15rem 0.42rem;
+      padding:
+        0.12rem 0.38rem;
 
-      border: 1px solid #4C9BE844;
+      border:
+        1px solid #4C9BE844;
+
       border-radius: 4px;
 
       transition:
@@ -212,46 +223,62 @@
     }
 
     .open-link:hover {
+
       background: #4C9BE822;
       border-color: var(--accent);
     }
 
     /* =========================
-       IFRAME COMPACTING
+       IFRAME AREA
        ========================= */
 
     .iframe-wrapper {
-        position: relative;
-        flex: 1;
-        overflow: hidden;
-        background: var(--panel-2);
+
+      position: relative;
+
+      flex: 1;
+
+      overflow: hidden;
+
+      background: var(--panel-2);
     }
-    
-    /* AGGRESSIVE CROPPING + OVERSCAN */
-    
+
+    /* ===================================
+       AGGRESSIVE COMPACT CROPPING
+       =================================== */
+
     iframe {
-        position: absolute;
-    
-        top: 0;
-        left: 0;
-    
-        border: none;
-    
-        /* make iframe logically larger */
-        width: 145%;
-        height: 145%;
-    
-        /* compact scaling */
-        transform: scale(0.69);
-    
-        /* anchor scaling */
-        transform-origin: top left;
-    
-        /* shift content */
-        margin-left: -18%;
-        margin-top: -4%;
-    
-        background: var(--panel-2);
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      border: none;
+
+      /*
+        Large virtual canvas
+      */
+
+      width: 145%;
+      height: 145%;
+
+      /*
+        Strong shrink
+      */
+
+      transform: scale(0.69);
+
+      transform-origin: top left;
+
+      /*
+        Remove right whitespace
+      */
+
+      margin-left: -18%;
+      margin-top: -4%;
+
+      background: var(--panel-2);
     }
 
     /* =========================
@@ -259,14 +286,17 @@
        ========================= */
 
     footer {
+
       text-align: center;
 
-      padding: 1rem;
+      padding: 0.9rem;
 
-      font-size: 0.68rem;
+      font-size: 0.65rem;
+
       color: #444;
 
-      border-top: 1px solid var(--border);
+      border-top:
+        1px solid var(--border);
     }
 
     /* =========================
@@ -274,6 +304,7 @@
        ========================= */
 
     @media (max-width: 700px) {
+
       header {
         flex-wrap: wrap;
       }
@@ -294,26 +325,34 @@
 <body>
 
   <header>
-    <h1>📈 Pair Trading — Compact Dashboard</h1>
 
-    <span class="badge">3 pairs</span>
+    <h1>
+      📈 Pair Trading — Compact Dashboard
+    </h1>
+
+    <span class="badge">
+      3 pairs
+    </span>
 
     <span class="meta">
       Updated: 2026-05-08 23:00 CEST
     </span>
 
-    <div class="density-controls">
-      <button onclick="setScale(0.70)">Dense</button>
-      <button onclick="setScale(0.80)">Normal</button>
-      <button onclick="setScale(0.90)">Large</button>
-    </div>
   </header>
 
   <main>
 
+    <!-- =========================
+         CARD 1
+         ========================= -->
+
     <div class="card">
+
       <div class="card-header">
-        <span class="pair-name">MES / MCL</span>
+
+        <span class="pair-name">
+          MES / MCL
+        </span>
 
         <span class="ts-badge">
           2026-05-08 23:00 CEST
@@ -322,22 +361,36 @@
         <a class="open-link"
            href="charts/zscore_MES_MCL.html"
            target="_blank">
+
            ↗ open
+
         </a>
+
       </div>
 
       <div class="iframe-wrapper">
+
         <iframe
           src="charts/zscore_MES_MCL.html"
           loading="lazy"
           title="MES / MCL">
         </iframe>
+
       </div>
+
     </div>
 
+    <!-- =========================
+         CARD 2
+         ========================= -->
+
     <div class="card">
+
       <div class="card-header">
-        <span class="pair-name">MZS / MES</span>
+
+        <span class="pair-name">
+          MZS / MES
+        </span>
 
         <span class="ts-badge">
           2026-05-08 21:00 CEST
@@ -346,22 +399,36 @@
         <a class="open-link"
            href="charts/zscore_MZS_MES.html"
            target="_blank">
+
            ↗ open
+
         </a>
+
       </div>
 
       <div class="iframe-wrapper">
+
         <iframe
           src="charts/zscore_MZS_MES.html"
           loading="lazy"
           title="MZS / MES">
         </iframe>
+
       </div>
+
     </div>
 
+    <!-- =========================
+         CARD 3
+         ========================= -->
+
     <div class="card">
+
       <div class="card-header">
-        <span class="pair-name">MES / MZC</span>
+
+        <span class="pair-name">
+          MES / MZC
+        </span>
 
         <span class="ts-badge">
           2026-05-08 21:00 CEST
@@ -370,33 +437,33 @@
         <a class="open-link"
            href="charts/zscore_MES_MZC.html"
            target="_blank">
+
            ↗ open
+
         </a>
+
       </div>
 
       <div class="iframe-wrapper">
+
         <iframe
           src="charts/zscore_MES_MZC.html"
           loading="lazy"
           title="MES / MZC">
         </iframe>
+
       </div>
+
     </div>
 
   </main>
 
   <footer>
+
     Auto-generated by GitHubChartUploader
     • Compact dashboard edition
-  </footer>
 
-  <script>
-    function setScale(scale) {
-      document.documentElement
-        .style
-        .setProperty('--ui-scale', scale);
-    }
-  </script>
+  </footer>
 
 </body>
 </html>
