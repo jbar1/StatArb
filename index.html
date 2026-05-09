@@ -34,7 +34,7 @@
 
       /* density defaults */
 
-      --card-height: 250px;
+      --card-height: 300px;
       --card-width: 400px;
     }
 
@@ -308,8 +308,6 @@
 
     iframe {
 
-    overflow: hidden;
-
     position: absolute;
 
     /*
@@ -320,6 +318,12 @@
     left: -15px;
 
     border: none;
+
+    /*
+      render smaller
+    */
+
+    zoom: 0.82;
 
     /*
       moderate enlargement
@@ -547,12 +551,12 @@
 
         root.style.setProperty(
           '--card-height',
-          '210px'
+          '250px'
         );
 
         root.style.setProperty(
           '--card-width',
-          '340px'
+          '350px'
         );
       }
 
@@ -560,12 +564,12 @@
 
         root.style.setProperty(
           '--card-height',
-          '250px'
+          '275px'
         );
 
         root.style.setProperty(
           '--card-width',
-          '400px'
+          '375px'
         );
       }
 
@@ -573,12 +577,12 @@
 
         root.style.setProperty(
           '--card-height',
-          '320px'
+          '300px'
         );
 
         root.style.setProperty(
           '--card-width',
-          '520px'
+          '400px'
         );
       }
     }
