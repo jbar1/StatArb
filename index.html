@@ -1,597 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8" />
-
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0" />
-
-  <title>
-    Pair Trading — Compact Dashboard
-  </title>
-
-  <meta name="description"
-        content="Compact statistical arbitrage dashboard." />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pair Trading — Z-Score Charts</title>
+  <meta name="description" content="Interactive z-score charts for statistical arbitrage pair trading." />
   <style>
-
-    :root {
-
-      --bg: #0d0d1a;
-
-      --panel: #141425;
-      --panel-2: #111122;
-
-      --border: #2e2e4e;
-      --accent: #4C9BE8;
-
-      --text: #d0d0e0;
-      --muted: #666;
-
-      --radius: 10px;
-
-      /* density defaults */
-
-      --card-height: 450px;
-      --card-width: 400px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-
-      font-family:
-        'Segoe UI',
-        system-ui,
-        sans-serif;
-
-      background: var(--bg);
-      color: var(--text);
-
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0d0d1a;
+      color: #ccc;
       min-height: 100vh;
-
-      font-size: 12px;
-      line-height: 1.2;
     }
 
-    /* =========================
-       HEADER
-       ========================= */
-
+    /* ── header ── */
     header {
-
-      background:
-        linear-gradient(
-          135deg,
-          #141425 0%,
-          #1a1a35 100%
-        );
-
-      border-bottom:
-        1px solid var(--border);
-
-      padding:
-        0.7rem 1rem;
-
+      background: linear-gradient(135deg, #141425 0%, #1a1a35 100%);
+      border-bottom: 1px solid #2e2e4e;
+      padding: 1.5rem 2rem;
       display: flex;
       align-items: center;
-      gap: 0.7rem;
-
-      position: sticky;
-      top: 0;
-      z-index: 10;
-
-      backdrop-filter: blur(5px);
-
-      flex-wrap: wrap;
+      gap: 1rem;
     }
-
     header h1 {
-
-      font-size: 0.95rem;
+      font-size: 1.4rem;
       font-weight: 600;
-
       color: #e0e0ff;
       letter-spacing: 0.02em;
     }
-
     .badge {
-
-      background: var(--accent);
-      color: white;
-
-      font-size: 0.58rem;
+      background: #4C9BE8;
+      color: #fff;
+      font-size: 0.72rem;
       font-weight: 700;
-
-      padding:
-        0.14rem 0.42rem;
-
+      padding: 0.2rem 0.6rem;
       border-radius: 999px;
+      letter-spacing: 0.04em;
     }
-
     .meta {
-
       margin-left: auto;
-
-      font-size: 0.65rem;
-      color: var(--muted);
+      font-size: 0.78rem;
+      color: #666;
     }
 
-    /* =========================
-       DENSITY BUTTONS
-       ========================= */
-
-    .density-controls {
-
-      display: flex;
-      gap: 0.35rem;
-    }
-
-    .density-controls button {
-
-      background: #1c1c33;
-      color: #bbb;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 5px;
-
-      padding:
-        0.18rem 0.42rem;
-
-      font-size: 0.65rem;
-
-      cursor: pointer;
-
-      transition:
-        border-color 0.15s,
-        background 0.15s,
-        color 0.15s;
-    }
-
-    .density-controls button:hover {
-
-      border-color: var(--accent);
-      background: #232344;
-      color: white;
-    }
-
-    /* =========================
-       GRID
-       ========================= */
-
+    /* ── grid ── */
     main {
-
       display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(
-            min(100%, var(--card-width)),
-            1fr
-          )
-        );
-
-      gap: 0.7rem;
-
-      padding: 0.7rem;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 680px), 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
     }
 
-    /* =========================
-       CARD
-       ========================= */
-
+    /* ── card ── */
     .card {
-
-      background: var(--panel);
-
-      border:
-        1px solid var(--border);
-
-      border-radius: var(--radius);
-
+      background: #141425;
+      border: 1px solid #2e2e4e;
+      border-radius: 12px;
       overflow: hidden;
-
       display: flex;
       flex-direction: column;
-
-      min-height: var(--card-height);
-
-      transition:
-        border-color 0.18s,
-        box-shadow 0.18s,
-        transform 0.12s;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
-
     .card:hover {
-
-      border-color: var(--accent);
-
-      box-shadow:
-        0 0 0 1px #4C9BE822,
-        0 8px 24px #00000055;
-
-      transform: translateY(-1px);
+      border-color: #4C9BE8;
+      box-shadow: 0 0 0 1px #4C9BE822, 0 8px 32px #00000066;
     }
-
-    /* =========================
-       CARD HEADER
-       ========================= */
 
     .card-header {
-
-      padding:
-        0.38rem 0.65rem;
-
-      background: var(--panel-2);
-
-      border-bottom:
-        1px solid var(--border);
-
+      padding: 0.75rem 1rem;
+      background: #1a1a2e;
+      border-bottom: 1px solid #2e2e4e;
       display: flex;
       align-items: center;
-
-      gap: 0.4rem;
+      gap: 0.5rem;
     }
-
     .pair-name {
-
-      font-size: 0.78rem;
+      font-size: 0.9rem;
       font-weight: 600;
-
       color: #e0e0ff;
-
       flex: 1;
     }
-
     .ts-badge {
-
-      font-size: 0.58rem;
-      color: var(--muted);
-
+      font-size: 0.68rem;
+      color: #666;
       white-space: nowrap;
     }
-
     .open-link {
-
-      font-size: 0.62rem;
-
-      color: var(--accent);
-
+      font-size: 0.72rem;
+      color: #4C9BE8;
       text-decoration: none;
-
-      padding:
-        0.12rem 0.38rem;
-
-      border:
-        1px solid #4C9BE844;
-
-      border-radius: 4px;
-
-      transition:
-        background 0.15s,
-        border-color 0.15s;
+      padding: 0.2rem 0.5rem;
+      border: 1px solid #4C9BE844;
+      border-radius: 5px;
+      transition: background 0.15s;
+      white-space: nowrap;
     }
-
-    .open-link:hover {
-
-      background: #4C9BE822;
-      border-color: var(--accent);
-    }
-
-    /* =========================
-       IFRAME AREA
-       ========================= */
-
-    .iframe-wrapper {
-
-      position: relative;
-
-      flex: 1;
-
-      overflow: hidden;
-
-      background: var(--panel-2);
-    }
-
-    /* =========================
-       CROPPED IFRAME
-       ========================= */
+    .open-link:hover { background: #4C9BE822; }
 
     iframe {
-
-    position: absolute;
-
-    /*
-      fine alignment
-    */
-
-    top: -2px;
-    left: -9px;
-
-    border: none;
-
-    /*
-      slightly enlarged viewport
-    */
-
-    width: calc(100% + 130px);
-    height: calc(100% + 10px);
-
-    /*
-      mild compacting
-    */
-
-    zoom: 0.80;
-
-    transform: scale(0.90);
-
-    transform-origin: top left;
-
-    background: var(--panel-2);
-    }
-    
-    /*
-    This reaches inside the iframe rendering layer
-    in most browsers because Plotly injects absolute overlays.
-    */    
-    .card iframe {
-        pointer-events: auto;
+      width: calc(100% + 16px);   /* expand slightly left/right */
+      height: 440px;              /* more room for bottom area */
+      border: none;
+      display: block;
+      background: #1a1a2e;
+      margin-left: -8px;          /* shift chart left */
+      margin-top: 6px;            /* shift chart slightly downward */
+      margin-bottom: -10px;       /* allow chart bottom to extend */
     }
 
-    /* =========================
-       FOOTER
-       ========================= */
-
+    /* ── footer ── */
     footer {
-
       text-align: center;
-
-      padding: 0.9rem;
-
-      font-size: 0.65rem;
-
+      padding: 2rem;
+      font-size: 0.75rem;
       color: #444;
-
-      border-top:
-        1px solid var(--border);
+      border-top: 1px solid #2e2e4e;
     }
-
-    /* =========================
-       MOBILE
-       ========================= */
-
-    @media (max-width: 700px) {
-
-      .meta {
-        width: 100%;
-        margin-left: 0;
-      }
-
-      main {
-        grid-template-columns: 1fr;
-      }
-    }
-
   </style>
-
 </head>
-
 <body>
-
   <header>
-
-    <h1>
-      📈 Pair Trading — Compact Dashboard
-    </h1>
-
-    <span class="badge">
-      3 pairs
-    </span>
-
-    <span class="meta">
-      Updated: 2026-05-08 23:00 CEST
-    </span>
-
-    <div class="density-controls">
-
-      <button onclick="setDensity('dense')">
-        Dense
-      </button>
-
-      <button onclick="setDensity('normal')">
-        Normal
-      </button>
-
-      <button onclick="setDensity('large')">
-        Large
-      </button>
-
-    </div>
-
+    <h1>&#x1F4C8; Pair Trading — Z-Score Charts</h1>
+    <span class="badge">4 pairs</span>
+    <span class="meta">Updated: 2026-05-11 01:00 CEST</span>
   </header>
 
   <main>
-
-    <!-- =========================
-         CARD 1
-         ========================= -->
-
     <div class="card">
-
       <div class="card-header">
-
-        <span class="pair-name">
-          MES / MCL
-        </span>
-
-        <span class="ts-badge">
-          2026-05-08 23:00 CEST
-        </span>
-
-        <a class="open-link"
-           href="charts/zscore_MES_MCL.html"
-           target="_blank">
-
-          ↗ open
-
-        </a>
-
+        <span class="pair-name">MGC / MCL</span>
+        <span class="ts-badge">2026-05-11 01:00 CEST</span>
+        <a class="open-link" href="charts/zscore_MGC_MCL.html" target="_blank">&#x2197; open</a>
       </div>
-
-      <div class="iframe-wrapper">
-
-        <iframe
-          src="charts/zscore_MES_MCL.html"
-          loading="lazy"
-          title="MES / MCL">
-        </iframe>
-
-      </div>
-
+      <iframe src="charts/zscore_MGC_MCL.html" loading="lazy" title="MGC / MCL"></iframe>
     </div>
-
-    <!-- =========================
-         CARD 2
-         ========================= -->
-
     <div class="card">
-
       <div class="card-header">
-
-        <span class="pair-name">
-          MZS / MES
-        </span>
-
-        <span class="ts-badge">
-          2026-05-08 21:00 CEST
-        </span>
-
-        <a class="open-link"
-           href="charts/zscore_MZS_MES.html"
-           target="_blank">
-
-          ↗ open
-
-        </a>
-
+        <span class="pair-name">MES / MCL</span>
+        <span class="ts-badge">2026-05-08 23:00 CEST</span>
+        <a class="open-link" href="charts/zscore_MES_MCL.html" target="_blank">&#x2197; open</a>
       </div>
-
-      <div class="iframe-wrapper">
-
-        <iframe
-          src="charts/zscore_MZS_MES.html"
-          loading="lazy"
-          title="MZS / MES">
-        </iframe>
-
-      </div>
-
+      <iframe src="charts/zscore_MES_MCL.html" loading="lazy" title="MES / MCL"></iframe>
     </div>
-
-    <!-- =========================
-         CARD 3
-         ========================= -->
-
     <div class="card">
-
       <div class="card-header">
-
-        <span class="pair-name">
-          MES / MZC
-        </span>
-
-        <span class="ts-badge">
-          2026-05-08 21:00 CEST
-        </span>
-
-        <a class="open-link"
-           href="charts/zscore_MES_MZC.html"
-           target="_blank">
-
-          ↗ open
-
-        </a>
-
+        <span class="pair-name">MZS / MES</span>
+        <span class="ts-badge">2026-05-08 21:00 CEST</span>
+        <a class="open-link" href="charts/zscore_MZS_MES.html" target="_blank">&#x2197; open</a>
       </div>
-
-      <div class="iframe-wrapper">
-
-        <iframe
-          src="charts/zscore_MES_MZC.html"
-          loading="lazy"
-          title="MES / MZC">
-        </iframe>
-
-      </div>
-
+      <iframe src="charts/zscore_MZS_MES.html" loading="lazy" title="MZS / MES"></iframe>
     </div>
-
+    <div class="card">
+      <div class="card-header">
+        <span class="pair-name">MES / MZC</span>
+        <span class="ts-badge">2026-05-08 21:00 CEST</span>
+        <a class="open-link" href="charts/zscore_MES_MZC.html" target="_blank">&#x2197; open</a>
+      </div>
+      <iframe src="charts/zscore_MES_MZC.html" loading="lazy" title="MES / MZC"></iframe>
+    </div>
   </main>
 
   <footer>
-
-    Auto-generated by GitHubChartUploader
-    • Compact dashboard edition
-
+    Auto-generated by GitHubChartUploader &bull; 2026-05-11 01:00 CEST
   </footer>
-
-  <script>
-
-    function setDensity(mode) {
-
-      const root =
-        document.documentElement;
-
-      if (mode === 'dense') {
-
-        root.style.setProperty(
-          '--card-height',
-          '450px'
-        );
-
-        root.style.setProperty(
-          '--card-width',
-          '400px'
-        );
-      }
-
-      if (mode === 'normal') {
-
-        root.style.setProperty(
-          '--card-height',
-          '590px'
-        );
-
-        root.style.setProperty(
-          '--card-width',
-          '450px'
-        );
-      }
-
-      if (mode === 'large') {
-
-        root.style.setProperty(
-          '--card-height',
-          '900px'
-        );
-
-        root.style.setProperty(
-          '--card-width',
-          '500px'
-        );
-      }
-    }
-
-  </script>
-
 </body>
 </html>
